@@ -1,6 +1,6 @@
-export function debounce(delay: number, fn: Function) {
-    let timerId:NodeJS.Timeout|null;
-    return function (...args: any[]) {
+export function debounce(delay: number, fn: (...args: any[]) => void) {
+    let timerId: NodeJS.Timeout | null;
+    return (...args: any[]) => {
       if (timerId) {
         clearTimeout(timerId);
       }
@@ -8,5 +8,5 @@ export function debounce(delay: number, fn: Function) {
         fn(...args);
         timerId = null;
       }, delay);
-    }
+    };
   }

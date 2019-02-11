@@ -1,6 +1,6 @@
-export function httpRequest(method: httpMethod, url: string, payload?: {}){
+export function httpRequest(method: httpMethod, url: string, payload?: {}) {
   const headers = {
-    'Accept': 'application/json',
+    Accept: 'application/json',
   };
   let body;
   if (method !== httpMethod.get && method !== httpMethod.delete) {
@@ -11,8 +11,8 @@ export function httpRequest(method: httpMethod, url: string, payload?: {}){
 }
 
 export enum httpMethod {
-  get = "GET",
-  post = "POST",
-  delete = "DELETE",
-  patch = "PATCH"
+  get = 'GET',
+  post = 'POST',
+  delete = 'DELETE',
+  patch = 'PATCH',
 }

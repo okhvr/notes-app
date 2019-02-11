@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { httpMethod, httpRequest } from '../../helpers/httpRequest';
 import { INote } from '../../interfaces/note';
-import { httpRequest, httpMethod } from '../../helpers/httpRequest';
-import Search from '../search/Search';
 import Note from '../note/Note';
 import NoteCreation from '../noteCreation/NoteCreation';
-import { Link } from 'react-router-dom';
-
+import Search from '../search/Search';
 
 type MyProps = {};
 type MyState = { notes: INote[] };
@@ -22,90 +21,88 @@ export default class NoteListPage extends Component<MyProps, MyState> {
     this.handleArchive = this.handleArchive.bind(this);
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.loadNotes();
   }
 
-  addNote = (note: INote) => {
-    httpRequest(httpMethod.post, "notes", note)
-    .then(res => res.json())
-    .then((note) => this.setState({notes: [...this.state.notes, note]}))
-    .catch((er: Error) => console.log('Er', er))
+  public addNote(note: INote) {
+    httpRequest(httpMethod.post, 'notes', note)
+    .then((res) => res.json())
+    .then((n) => this.setState({notes: [...this.state.notes, n]}))
+    .catch((er: Error) => console.error('Er', er));
   }
 
-  deleteNote(note: INote) {
+  public deleteNote(note: INote) {
     httpRequest(httpMethod.delete, `notes/${note.id}`)
-    .then(() => this.setState({notes: this.state.notes.filter(n => n.id !== note.id)}))
-    .catch((er: Error) => console.log('Er', er))
+    .then(() => this.setState({notes: this.state.notes.filter((n) => n.id !== note.id)}))
+    .catch((er: Error) => console.error('Er', er));
   }
 
-  handleMarkAsDone(note: INote) {
+  public handleMarkAsDone(note: INote) {
     httpRequest(httpMethod.patch, `notes/${note.id}`, {isDone: !note.isDone})
     .then(() => {
-      const marked = this.state.notes.find(n => n.id === note.id);
+      const marked = this.state.notes.find((n) => n.id === note.id);
       if (!marked) {
         return;
       }
-      const updatedNotes = this.state.notes.map(n => n === marked ? {...marked, isDone: !marked.isDone} : n);
+      const updatedNotes = this.state.notes.map((n) => n === marked ? {...marked, isDone: !marked.isDone} : n);
       this.setState({notes: updatedNotes});
     })
-    .catch((er: Error) => console.log('Er', er))
+    .catch((er: Error) => console.error('Er', er));
   }
 
-  handleSearch(searchValue: string) {
-    if(searchValue.length === 0) {
+  public handleSearch(searchValue: string) {
+    if (searchValue.length === 0) {
       this.loadNotes();
     }
     httpRequest(httpMethod.get, `notes?isArchived=false&q=${searchValue}`)
-    .then(res => res.json())
-    .then(notes => this.setState({notes}))
-    .catch((er: Error) => console.log('Er', er))
+    .then((res) => res.json())
+    .then((notes) => this.setState({notes}))
+    .catch((er: Error) => console.error('Er', er));
   }
 
-  handleArchive(note:INote) {
+  public handleArchive(note: INote) {
     httpRequest(httpMethod.patch, `notes/${note.id}`, {isArchived: true})
     .then(() => {
-      const archived = this.state.notes.find(n => n.id === note.id);
+      const archived = this.state.notes.find((n) => n.id === note.id);
       if (!archived) {
         return;
       }
-      const updatedNotes = this.state.notes.filter(n => n !== archived);
+      const updatedNotes = this.state.notes.filter((n) => n !== archived);
       this.setState({notes: updatedNotes});
     })
-    .catch((er: Error) => console.log('Er', er))
+    .catch((er: Error) => console.error('Er', er));
   }
 
-  loadNotes() {
-    httpRequest(httpMethod.get, "notes?isArchived=false")
-    .then(res => res.json())
-    .then(notes => this.setState({notes}))
-    .catch((er: Error) => alert(`Er ${er}`))
+  public loadNotes() {
+    httpRequest(httpMethod.get, 'notes?isArchived=false')
+    .then((res) => res.json())
+    .then((notes) => this.setState({notes}))
+    .catch((er: Error) => alert(`Er ${er}`));
   }
 
-  render() {
+  public render() {
     return (
       <div>
-      <nav className="navbar navbar-light bg-light">
-        <span className="navbar-brand mb-0 h1">My Notes 📝</span>
+      <nav className='navbar navbar-light bg-light'>
+        <span className='navbar-brand mb-0 h1'>My Notes 📝</span>
         <Link to={'/archived'}>
-            <button className="btn btn-light">archived notes</button>
+            <button className='btn btn-light'>archived notes</button>
         </Link>
-        <Search handleSearch={this.handleSearch}></Search>
+        <Search handleSearch={this.handleSearch}/>
       </nav>
-      <div className="container">
-        <NoteCreation
-          addNote={this.addNote}>
-        </NoteCreation>
+      <div className='container'>
+        <NoteCreation addNote={this.addNote}/>
         {this.state.notes.length === 0 ?
-        <div>There is no notes</div>:
-        this.state.notes.map((note) => 
+        <div>There is no notes</div> :
+        this.state.notes.map((note) =>
         <Note
           note={note}
           key={note.id}
           deleteNote={this.deleteNote}
           handleMarkAsDone={this.handleMarkAsDone}
           handleArchive={this.handleArchive}
-        ></Note>)}
+        />)}
       </div>
     </div>
     );

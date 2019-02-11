@@ -1,5 +1,6 @@
-import React, { Component, FormEvent, ChangeEvent } from 'react';
+// tslint:disable-next-line:no-submodule-imports
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { ChangeEvent, Component, FormEvent } from 'react';
 import { INote } from '../../interfaces/note';
 
 type MyProps = { addNote: (note: INote) => void};
@@ -9,59 +10,64 @@ export default class Note extends Component<MyProps, MyState> {
     constructor(props: MyProps) {
         super(props);
         this.state = {
-            title: '',
             description: '',
-        }
-    
+            title: '',
+        };
+
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.handleSubmitForm = this.handleSubmitForm.bind(this);
     }
 
-    handleTitleChange(event: ChangeEvent<HTMLInputElement>) {
+    public handleTitleChange(event: ChangeEvent<HTMLInputElement>) {
         this.setState({
-          title: event.target.value
+          title: event.target.value,
         });
     }
 
-    handleDescriptionChange(event: ChangeEvent<HTMLTextAreaElement>) {
+    public handleDescriptionChange(event: ChangeEvent<HTMLTextAreaElement>) {
         this.setState({
-            description: event.target.value
+            description: event.target.value,
           });
     }
 
-    handleSubmitForm(e: FormEvent<HTMLFormElement>) {
+    public handleSubmitForm(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const note: INote = {
-            title: this.state.title,
-            description: this.state.description,
             created: new Date(),
+            description: this.state.description,
+            isArchived: false,
             isDone: false,
-            isArchived: false
-        }
+            title: this.state.title,
+        };
         this.props.addNote(note);
         this.setState({
-            "title": "",
-            "description": ""
+            description: '',
+            title: '',
         });
     }
-    
-    render() {
+
+    public render() {
         return (
-            <form 
-                onSubmit={this.handleSubmitForm}>
-                <div className="form-group">
-                    <input 
+            <form onSubmit={this.handleSubmitForm}>
+                <div className='form-group'>
+                    <input
                         onChange={this.handleTitleChange}
-                        name="title"
+                        name='title'
                         value={this.state.title}
-                        className="form-control form-control-lg" type="text" placeholder="Note title..."></input>
-                    <textarea 
+                        className='form-control form-control-lg'
+                        type='text'
+                        placeholder='Note title...'
+                    />
+                    <textarea
                         onChange={this.handleDescriptionChange}
-                        name="description"
+                        name='description'
                         value={this.state.description}
-                        className="form-control" rows={3} placeholder="Note here..."></textarea>
-                <button type="submit" className="btn btn-info btn-block">Add new note</button>
+                        className='form-control'
+                        rows={3}
+                        placeholder='Note here...'
+                    />
+                <button type='submit' className='btn btn-info btn-block'>Add new note</button>
                 </div>
             </form>
         );
