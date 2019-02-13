@@ -22,24 +22,24 @@ export default class ArchivedListPage extends Component<MyProps, MyState> {
   render() {
     return (
       <div>
-      <nav className="navbar navbar-light bg-light">
-        <Link to={'/'}>
-            <button className="btn btn-light">
-            <span className="navbar-brand mb-0 h1">My Notes 📝</span>
-            </button>
-        </Link>
-      </nav>
-      <div className="container">
-        {this.state.notes.length === 0 ?
-        <div>There is no archived notes</div> :
-        this.state.notes.map((note) =>
-        <Note
-          note={note}
-          key={note.id}
-          handleArchive={this.handleUnArchive}
-        />)}
+        <nav className="navbar navbar-light bg-light">
+          <Link to={'/'}>
+              <button className="btn btn-light">
+              <span className="navbar-brand mb-0 h1">My Notes 📝</span>
+              </button>
+          </Link>
+        </nav>
+        <div className="container">
+          {this.state.notes.length === 0 ?
+          <div>There is no archived notes</div> :
+          this.state.notes.map((note) =>
+          <Note
+            note={note}
+            key={note.id}
+            handleArchive={this.handleUnArchive}
+          />)}
+        </div>
       </div>
-    </div>
     );
   }
 
