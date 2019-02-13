@@ -7,7 +7,7 @@ export function httpRequest(method: httpMethod, url: string, payload?: {}) {
     headers['Content-Type'] = 'application/json';
     body = JSON.stringify(payload);
   }
-  return fetch(`http://localhost:1111/${url}`, {headers, method, body});
+  return fetch(`http://localhost:1111/${url}`, { headers, method, body });
 }
 
 export enum httpMethod {

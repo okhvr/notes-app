@@ -13,7 +13,7 @@ export default class NoteListPage extends Component<MyProps, MyState> {
 
   constructor(props: {}) {
     super(props);
-    this.state = {notes: []};
+    this.state = { notes: [] };
     this.addNote = this.addNote.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
     this.handleMarkAsDone = this.handleMarkAsDone.bind(this);
@@ -55,25 +55,25 @@ export default class NoteListPage extends Component<MyProps, MyState> {
   private addNote(note: INote) {
     httpRequest(httpMethod.post, 'notes', note)
       .then((res) => res.json())
-      .then((n) => this.setState({notes: [...this.state.notes, n]}))
+      .then((n) => this.setState({ notes: [...this.state.notes, n] }))
       .catch((er: Error) => console.error('Er', er));
   }
 
   private deleteNote(note: INote) {
     httpRequest(httpMethod.delete, `notes/${note.id}`)
-      .then(() => this.setState({notes: this.state.notes.filter((n) => n.id !== note.id)}))
+      .then(() => this.setState({ notes: this.state.notes.filter((n) => n.id !== note.id) }))
       .catch((er: Error) => console.error('Er', er));
   }
 
   private handleMarkAsDone(note: INote) {
-    httpRequest(httpMethod.patch, `notes/${note.id}`, {isDone: !note.isDone})
+    httpRequest(httpMethod.patch, `notes/${note.id}`, { isDone: !note.isDone })
       .then(() => {
         const marked = this.state.notes.find((n) => n.id === note.id);
         if (!marked) {
           return;
         }
-        const updatedNotes = this.state.notes.map((n) => n === marked ? {...marked, isDone: !marked.isDone} : n);
-        this.setState({notes: updatedNotes});
+        const updatedNotes = this.state.notes.map((n) => n === marked ? { ...marked, isDone: !marked.isDone } : n);
+        this.setState({ notes: updatedNotes });
       })
       .catch((er: Error) => console.error('Er', er));
   }
@@ -84,19 +84,19 @@ export default class NoteListPage extends Component<MyProps, MyState> {
     }
     httpRequest(httpMethod.get, `notes?isArchived=false&q=${searchValue}`)
       .then((res) => res.json())
-      .then((notes) => this.setState({notes}))
+      .then((notes) => this.setState({ notes }))
       .catch((er: Error) => console.error('Er', er));
   }
 
   private handleArchive(note: INote) {
-    httpRequest(httpMethod.patch, `notes/${note.id}`, {isArchived: true})
+    httpRequest(httpMethod.patch, `notes/${note.id}`, { isArchived: true })
       .then(() => {
         const archived = this.state.notes.find((n) => n.id === note.id);
         if (!archived) {
           return;
         }
         const updatedNotes = this.state.notes.filter((n) => n !== archived);
-        this.setState({notes: updatedNotes});
+        this.setState({ notes: updatedNotes });
       })
       .catch((er: Error) => console.error('Er', er));
   }
@@ -104,7 +104,7 @@ export default class NoteListPage extends Component<MyProps, MyState> {
   private loadNotes() {
     httpRequest(httpMethod.get, 'notes?isArchived=false')
       .then((res) => res.json())
-      .then((notes) => this.setState({notes}))
+      .then((notes) => this.setState({ notes }))
       .catch((er: Error) => alert(`Er ${er}`));
   }
 }

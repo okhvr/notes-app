@@ -16,7 +16,15 @@ export default class EditNotePage extends Component<EditNoteProps, State> {
 
   constructor(props: EditNoteProps) {
     super(props);
-    this.state = {note: {description: '', title: '', created: new Date(), isDone: false, isArchived: false}};
+    this.state = {
+      note: {
+        created: new Date(),
+        description: '',
+        isArchived: false,
+        isDone: false,
+        title: '',
+      },
+    };
     this.handleEditNote = this.handleEditNote.bind(this);
   }
 
@@ -27,12 +35,12 @@ export default class EditNotePage extends Component<EditNoteProps, State> {
   loadNote(id: string) {
     httpRequest(httpMethod.get, 'notes/' + id)
       .then((res) => res.json())
-      .then((note) => this.setState({note}))
+      .then((note) => this.setState({ note }))
       .catch((er: Error) => alert(`Er ${er}`));
   }
 
   handleEditNote(change: {title?: string, description?: string}) {
-    this.setState({note: {...this.state.note, ...change}});
+    this.setState({ note: { ...this.state.note, ...change } });
     this.debounceEditNote(this.state.note.id, change);
   }
 

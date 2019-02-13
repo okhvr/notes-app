@@ -13,7 +13,7 @@ export default class NoteEditing extends Component<MyProps> {
     }
 
     render() {
-    const {title, description} = this.props.note;
+    const { title, description } = this.props.note;
     return (
 
             <div className="form-group col-11">
