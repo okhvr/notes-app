@@ -19,35 +19,7 @@ export default class Note extends Component<MyProps, MyState> {
         this.handleSubmitForm = this.handleSubmitForm.bind(this);
     }
 
-    public handleTitleChange(event: ChangeEvent<HTMLInputElement>) {
-        this.setState({
-          title: event.target.value,
-        });
-    }
-
-    public handleDescriptionChange(event: ChangeEvent<HTMLTextAreaElement>) {
-        this.setState({
-            description: event.target.value,
-          });
-    }
-
-    public handleSubmitForm(e: FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-        const note: INote = {
-            created: new Date(),
-            description: this.state.description,
-            isArchived: false,
-            isDone: false,
-            title: this.state.title,
-        };
-        this.props.addNote(note);
-        this.setState({
-            description: '',
-            title: '',
-        });
-    }
-
-    public render() {
+    render() {
         return (
             <form onSubmit={this.handleSubmitForm}>
                 <div className='form-group'>
@@ -71,5 +43,33 @@ export default class Note extends Component<MyProps, MyState> {
                 </div>
             </form>
         );
+    }
+
+    private handleTitleChange(event: ChangeEvent<HTMLInputElement>) {
+        this.setState({
+          title: event.target.value,
+        });
+    }
+
+    private handleDescriptionChange(event: ChangeEvent<HTMLTextAreaElement>) {
+        this.setState({
+            description: event.target.value,
+          });
+    }
+
+    private handleSubmitForm(e: FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        const note: INote = {
+            created: new Date(),
+            description: this.state.description,
+            isArchived: false,
+            isDone: false,
+            title: this.state.title,
+        };
+        this.props.addNote(note);
+        this.setState({
+            description: '',
+            title: '',
+        });
     }
 }

@@ -16,14 +16,7 @@ export default class Note extends Component<MyProps, MyState> {
         this.handleSearchChange = this.handleSearchChange.bind(this);
     }
 
-    public handleSearchChange(event: ChangeEvent<HTMLInputElement>) {
-        this.setState({
-          searchValue: event.target.value,
-        });
-        this.props.handleSearch(this.state.searchValue);
-    }
-
-    public render() {
+    render() {
     return (
             <div className='form-group'>
                 <input
@@ -37,4 +30,11 @@ export default class Note extends Component<MyProps, MyState> {
             </div>
     );
   }
+
+    private handleSearchChange(event: ChangeEvent<HTMLInputElement>) {
+        this.setState({
+        searchValue: event.target.value,
+        });
+        this.props.handleSearch(this.state.searchValue);
+    }
 }

@@ -19,7 +19,7 @@ export default class Note extends Component<MyProps> {
     this.handleArchive = this.handleArchive.bind(this);
   }
 
-  public render() {
+  render() {
     return (
       <article className='card border-light mb-3'>
             <header className='card-header'>

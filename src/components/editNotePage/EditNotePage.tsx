@@ -12,7 +12,7 @@ type State = {note: INote};
 
 export default class EditNotePage extends Component<EditNoteProps, State> {
 
-  public debounceEditNote = debounce(200, this.editNote);
+  private debounceEditNote = debounce(200, this.editNote);
 
   constructor(props: EditNoteProps) {
     super(props);
@@ -20,23 +20,23 @@ export default class EditNotePage extends Component<EditNoteProps, State> {
     this.handleEditNote = this.handleEditNote.bind(this);
   }
 
-  public componentDidMount() {
+  componentDidMount() {
     this.loadNote(this.props.match.params.id);
   }
 
-  public loadNote(id: string) {
+  loadNote(id: string) {
     httpRequest(httpMethod.get, 'notes/' + id)
     .then((res) => res.json())
     .then((note) => this.setState({note}))
     .catch((er: Error) => alert(`Er ${er}`));
   }
 
-  public handleEditNote(change: {title?: string, description?: string}) {
+  handleEditNote(change: {title?: string, description?: string}) {
     this.setState({note: {...this.state.note, ...change}});
     this.debounceEditNote(this.state.note.id, change);
   }
 
-  public render() {
+  render() {
     return (
       <div>
         <nav className='navbar navbar-light bg-light'>

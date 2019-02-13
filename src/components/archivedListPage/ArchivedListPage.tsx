@@ -15,11 +15,11 @@ export default class ArchivedListPage extends Component<MyProps, MyState> {
     this.handleUnArchive = this.handleUnArchive.bind(this);
   }
 
-  public componentDidMount() {
+  componentDidMount() {
     this.loadNotes();
   }
 
-  public render() {
+  render() {
     return (
       <div>
       <nav className='navbar navbar-light bg-light'>

@@ -12,14 +12,7 @@ export default class NoteEditing extends Component<MyProps> {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    public handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-        const change = {
-            [event.target.name]: event.target.value,
-          };
-        this.props.editNote(change);
-    }
-
-    public render() {
+    render() {
     const {title, description} = this.props.note;
     return (
 
@@ -43,4 +36,11 @@ export default class NoteEditing extends Component<MyProps> {
             </div>
     );
   }
+
+    private handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+        const change = {
+        [event.target.name]: event.target.value,
+        };
+        this.props.editNote(change);
+    }
 }
