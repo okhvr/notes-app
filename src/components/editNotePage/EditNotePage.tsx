@@ -26,9 +26,9 @@ export default class EditNotePage extends Component<EditNoteProps, State> {
 
   loadNote(id: string) {
     httpRequest(httpMethod.get, 'notes/' + id)
-    .then((res) => res.json())
-    .then((note) => this.setState({note}))
-    .catch((er: Error) => alert(`Er ${er}`));
+      .then((res) => res.json())
+      .then((note) => this.setState({note}))
+      .catch((er: Error) => alert(`Er ${er}`));
   }
 
   handleEditNote(change: {title?: string, description?: string}) {
