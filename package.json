@@ -16,7 +16,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "json-server": "json-server --watch db.json --port 1111"
+    "json-server": "json-server --watch db.json --port 1111",
+    "start-notes": "concurrently \"npm run json-server\" \"npm start\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -33,6 +34,7 @@
     "@types/react": "^16.8.1",
     "@types/react-dom": "16.0.11",
     "@types/react-router-dom": "^4.3.1",
+    "concurrently": "^4.1.0",
     "tslint": "^5.12.1",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^3.6.0",
