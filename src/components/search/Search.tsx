@@ -18,14 +18,14 @@ export default class Note extends Component<MyProps, MyState> {
 
     render() {
     return (
-            <div className='form-group'>
+            <div className="form-group">
                 <input
                     onChange={this.handleSearchChange}
-                    name='search'
+                    name="search"
                     value={this.state.searchValue}
-                    className='form-control form-control-lg'
-                    type='text'
-                    placeholder='Search'
+                    className="form-control form-control-lg"
+                    type="text"
+                    placeholder="Search"
                 />
             </div>
     );

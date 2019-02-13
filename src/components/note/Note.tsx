@@ -21,28 +21,28 @@ export default class Note extends Component<MyProps> {
 
   render() {
     return (
-      <article className='card border-light mb-3'>
-            <header className='card-header'>
-              <h4 className='card-title'>{this.props.note.title}</h4>
+      <article className="card border-light mb-3">
+            <header className="card-header">
+              <h4 className="card-title">{this.props.note.title}</h4>
             </header>
-            <div className='card-body'>
-              <div className='btn-group'>
+            <div className="card-body">
+              <div className="btn-group">
               {this.props.note.isDone ?
                 <button
                   onClick={this.handleMarkAsDone}
-                  className='btn btn-success btn-sm'
+                  className="btn btn-success btn-sm"
                   disabled={this.props.note.isArchived}
                 >✔️
                 </button> :
                 <button
                   onClick={this.handleMarkAsDone}
-                  className='btn btn-success btn-sm'
+                  className="btn btn-success btn-sm"
                   disabled={this.props.note.isArchived}
                 >⚫
                 </button>}
                 <Link to={`/note/${this.props.note.id}`}>
                   <button
-                    className='btn btn-info btn-sm'
+                    className="btn btn-info btn-sm"
                     disabled={this.props.note.isArchived}
                   >🖌
                   </button>
@@ -50,23 +50,23 @@ export default class Note extends Component<MyProps> {
 
                 <button
                   onClick={this.handleDelete}
-                  className='btn btn-danger btn-sm'
+                  className="btn btn-danger btn-sm"
                   disabled={this.props.note.isArchived}
                 >🗑️
                 </button>
                 {this.props.note.isArchived ?
                 <button
                   onClick={this.handleArchive}
-                  className='btn btn-success btn-sm'
+                  className="btn btn-success btn-sm"
                 >📩 unarchive
                 </button> :
                 <button
                   onClick={this.handleArchive}
-                  className='btn btn-secondary btn-sm'
+                  className="btn btn-secondary btn-sm"
                 >📩 archive
                 </button>}
               </div>
-              <p className='card-text'>{this.props.note.description}</p>
+              <p className="card-text">{this.props.note.description}</p>
             </div>
             <footer>
               <small>Created: {this.props.note.created}</small>

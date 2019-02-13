@@ -28,14 +28,14 @@ export default class NoteListPage extends Component<MyProps, MyState> {
   render() {
     return (
       <div>
-      <nav className='navbar navbar-light bg-light'>
-        <span className='navbar-brand mb-0 h1'>My Notes 📝</span>
+      <nav className="navbar navbar-light bg-light">
+        <span className="navbar-brand mb-0 h1">My Notes 📝</span>
         <Link to={'/archived'}>
-            <button className='btn btn-light'>archived notes</button>
+            <button className="btn btn-light">archived notes</button>
         </Link>
         <Search handleSearch={this.handleSearch}/>
       </nav>
-      <div className='container'>
+      <div className="container">
         <NoteCreation addNote={this.addNote}/>
         {this.state.notes.length === 0 ?
         <div>There is no notes</div> :

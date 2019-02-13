@@ -22,24 +22,24 @@ export default class Note extends Component<MyProps, MyState> {
     render() {
         return (
             <form onSubmit={this.handleSubmitForm}>
-                <div className='form-group'>
+                <div className="form-group">
                     <input
                         onChange={this.handleTitleChange}
-                        name='title'
+                        name="title"
                         value={this.state.title}
-                        className='form-control form-control-lg'
-                        type='text'
-                        placeholder='Note title...'
+                        className="form-control form-control-lg"
+                        type="text"
+                        placeholder="Note title..."
                     />
                     <textarea
                         onChange={this.handleDescriptionChange}
-                        name='description'
+                        name="description"
                         value={this.state.description}
-                        className='form-control'
+                        className="form-control"
                         rows={3}
-                        placeholder='Note here...'
+                        placeholder="Note here..."
                     />
-                <button type='submit' className='btn btn-info btn-block'>Add new note</button>
+                <button type="submit" className="btn btn-info btn-block">Add new note</button>
                 </div>
             </form>
         );

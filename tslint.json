@@ -4,7 +4,7 @@
       // override tslint-react rules here
       "jsx-wrap-multiline": false,
       "jsx-no-multiline-js": false,
-      "quotemark": [true, "single"],
+      "quotemark": [true, "single", "jsx-double"],
       "interface-over-type-literal": false,
       "no-console": [true, "log"],
       "member-access": [true, "no-public"]

@@ -8,9 +8,9 @@ export default function Main() {
   return (
     <main>
       <Switch>
-        <Route exact={true} path='/' component={NoteListPage}/>
-        <Route path='/note/:id' component={EditNotePage}/>
-        <Route exact={true} path='/archived' component={ArchivedListPage}/>
+        <Route exact={true} path="/" component={NoteListPage}/>
+        <Route path="/note/:id" component={EditNotePage}/>
+        <Route exact={true} path="/archived" component={ArchivedListPage}/>
       </Switch>
     </main>
   );

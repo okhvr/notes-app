@@ -16,22 +16,22 @@ export default class NoteEditing extends Component<MyProps> {
     const {title, description} = this.props.note;
     return (
 
-            <div className='form-group col-11'>
+            <div className="form-group col-11">
                 <input
                     onChange={this.handleChange}
-                    name='title'
+                    name="title"
                     value={title}
-                    className='form-control form-control-lg'
-                    type='text'
-                    placeholder='Note title...'
+                    className="form-control form-control-lg"
+                    type="text"
+                    placeholder="Note title..."
                 />
                 <textarea
                     onChange={this.handleChange}
-                    name='description'
+                    name="description"
                     value={description}
-                    className='form-control'
+                    className="form-control"
                     rows={9}
-                    placeholder='Note here...'
+                    placeholder="Note here..."
                 />
             </div>
     );

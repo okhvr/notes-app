@@ -39,15 +39,15 @@ export default class EditNotePage extends Component<EditNoteProps, State> {
   render() {
     return (
       <div>
-        <nav className='navbar navbar-light bg-light'>
-          <span className='navbar-brand mb-0 h1'>Here you can edit your note 📝</span>
+        <nav className="navbar navbar-light bg-light">
+          <span className="navbar-brand mb-0 h1">Here you can edit your note 📝</span>
           <Link to={'/'}>
-                  <button className='btn btn-light btn-sm'>⬅️ Back to the notes list
+                  <button className="btn btn-light btn-sm">⬅️ Back to the notes list
                   </button>
           </Link>
         </nav>
-        <div className='container'>
-          <div className='row justify-content-md-center'>
+        <div className="container">
+          <div className="row justify-content-md-center">
             <NoteEditing
               editNote={this.handleEditNote}
               note={this.state.note}
