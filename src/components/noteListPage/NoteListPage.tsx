@@ -11,15 +11,7 @@ type MyState = { notes: INote[] };
 
 export default class NoteListPage extends Component<MyProps, MyState> {
 
-  constructor(props: {}) {
-    super(props);
-    this.state = { notes: [] };
-    this.addNote = this.addNote.bind(this);
-    this.deleteNote = this.deleteNote.bind(this);
-    this.handleMarkAsDone = this.handleMarkAsDone.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleArchive = this.handleArchive.bind(this);
-  }
+  state: MyState  = { notes: [] };
 
   componentDidMount() {
     this.loadNotes();
@@ -52,20 +44,20 @@ export default class NoteListPage extends Component<MyProps, MyState> {
     );
   }
 
-  private addNote(note: INote) {
+  private addNote = (note: INote) => {
     httpRequest(httpMethod.post, 'notes', note)
       .then((res) => res.json())
       .then((n) => this.setState({ notes: [...this.state.notes, n] }))
       .catch((er: Error) => console.error('Er', er));
   }
 
-  private deleteNote(note: INote) {
+  private deleteNote = (note: INote) => {
     httpRequest(httpMethod.delete, `notes/${note.id}`)
       .then(() => this.setState({ notes: this.state.notes.filter((n) => n.id !== note.id) }))
       .catch((er: Error) => console.error('Er', er));
   }
 
-  private handleMarkAsDone(note: INote) {
+  private handleMarkAsDone = (note: INote) => {
     httpRequest(httpMethod.patch, `notes/${note.id}`, { isDone: !note.isDone })
       .then(() => {
         const marked = this.state.notes.find((n) => n.id === note.id);
@@ -78,7 +70,7 @@ export default class NoteListPage extends Component<MyProps, MyState> {
       .catch((er: Error) => console.error('Er', er));
   }
 
-  private handleSearch(searchValue: string) {
+  private handleSearch = (searchValue: string) => {
     if (searchValue.length === 0) {
       this.loadNotes();
     }
@@ -88,7 +80,7 @@ export default class NoteListPage extends Component<MyProps, MyState> {
       .catch((er: Error) => console.error('Er', er));
   }
 
-  private handleArchive(note: INote) {
+  private handleArchive = (note: INote) => {
     httpRequest(httpMethod.patch, `notes/${note.id}`, { isArchived: true })
       .then(() => {
         const archived = this.state.notes.find((n) => n.id === note.id);
@@ -101,7 +93,7 @@ export default class NoteListPage extends Component<MyProps, MyState> {
       .catch((er: Error) => console.error('Er', er));
   }
 
-  private loadNotes() {
+  private loadNotes = () => {
     httpRequest(httpMethod.get, 'notes?isArchived=false')
       .then((res) => res.json())
       .then((notes) => this.setState({ notes }))

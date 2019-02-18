@@ -12,12 +12,6 @@ type MyProps = {
 };
 
 export default class Note extends Component<MyProps> {
-  constructor(props: MyProps) {
-    super(props);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleMarkAsDone = this.handleMarkAsDone.bind(this);
-    this.handleArchive = this.handleArchive.bind(this);
-  }
 
   render() {
     return (
@@ -75,19 +69,19 @@ export default class Note extends Component<MyProps> {
     );
   }
 
-  private handleDelete() {
+  private handleDelete = () => {
     if (this.props.deleteNote) {
       this.props.deleteNote(this.props.note);
     }
   }
 
-  private handleMarkAsDone() {
+  private handleMarkAsDone = () => {
     if (this.props.handleMarkAsDone) {
       this.props.handleMarkAsDone(this.props.note);
     }
   }
 
-  private handleArchive() {
+  private handleArchive = () => {
     this.props.handleArchive(this.props.note);
   }
 }

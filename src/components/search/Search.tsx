@@ -7,14 +7,10 @@ type MyProps = { handleSearch: (searchValue: string) => void };
 type MyState = { searchValue: string };
 
 export default class Note extends Component<MyProps, MyState> {
-    constructor(props: MyProps) {
-        super(props);
-        this.state = {
-            searchValue: '',
-        };
 
-        this.handleSearchChange = this.handleSearchChange.bind(this);
-    }
+    state = {
+        searchValue: '',
+    };
 
     render() {
     return (
@@ -31,7 +27,7 @@ export default class Note extends Component<MyProps, MyState> {
     );
   }
 
-    private handleSearchChange(event: ChangeEvent<HTMLInputElement>) {
+    private handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
         this.setState({
         searchValue: event.target.value,
         });

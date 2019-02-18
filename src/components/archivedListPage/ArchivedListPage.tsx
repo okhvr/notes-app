@@ -9,11 +9,7 @@ type MyState = { notes: INote[] };
 
 export default class ArchivedListPage extends Component<MyProps, MyState> {
 
-  constructor(props: {}) {
-    super(props);
-    this.state = { notes: [] };
-    this.handleUnArchive = this.handleUnArchive.bind(this);
-  }
+  state: MyState = { notes: [] };
 
   componentDidMount() {
     this.loadNotes();
@@ -43,7 +39,7 @@ export default class ArchivedListPage extends Component<MyProps, MyState> {
     );
   }
 
-  private handleUnArchive(note: INote) {
+  private handleUnArchive = (note: INote) => {
     httpRequest(httpMethod.patch, `notes/${note.id}`, { isArchived: false })
       .then(() => {
         const unArchived = this.state.notes.find((n) => n.id === note.id);
@@ -56,7 +52,7 @@ export default class ArchivedListPage extends Component<MyProps, MyState> {
       .catch((er: Error) => console.error('Er', er));
   }
 
-  private loadNotes() {
+  private loadNotes = () => {
     httpRequest(httpMethod.get, 'notes?isArchived=true')
       .then((res) => res.json())
       .then((notes) => this.setState({ notes }))

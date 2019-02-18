@@ -12,36 +12,32 @@ type State = {note: INote};
 
 export default class EditNotePage extends Component<EditNoteProps, State> {
 
+  state: State = {
+    note: {
+      created: new Date(),
+      description: '',
+      isArchived: false,
+      isDone: false,
+      title: '',
+    },
+  };
+
   private debounceEditNote = debounce(200, this.editNote);
 
-  constructor(props: EditNoteProps) {
-    super(props);
-    this.state = {
-      note: {
-        created: new Date(),
-        description: '',
-        isArchived: false,
-        isDone: false,
-        title: '',
-      },
-    };
-    this.handleEditNote = this.handleEditNote.bind(this);
-  }
-
-  componentDidMount() {
-    this.loadNote(this.props.match.params.id);
-  }
-
-  loadNote(id: string) {
+  loadNote = (id: string) => {
     httpRequest(httpMethod.get, 'notes/' + id)
       .then((res) => res.json())
       .then((note) => this.setState({ note }))
       .catch((er: Error) => alert(`Er ${er}`));
   }
 
-  handleEditNote(change: {title?: string, description?: string}) {
+  handleEditNote = (change: {title?: string, description?: string}) => {
     this.setState({ note: { ...this.state.note, ...change } });
     this.debounceEditNote(this.state.note.id, change);
+  }
+
+  componentDidMount() {
+    this.loadNote(this.props.match.params.id);
   }
 
   render() {
@@ -70,4 +66,5 @@ export default class EditNotePage extends Component<EditNoteProps, State> {
     httpRequest(httpMethod.patch, `notes/${id}`, change)
     .catch((er: Error) => console.error('Er', er));
   }
+
 }

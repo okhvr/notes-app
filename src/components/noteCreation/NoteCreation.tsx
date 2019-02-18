@@ -7,17 +7,11 @@ type MyProps = { addNote: (note: INote) => void};
 type MyState = { title: string, description: string };
 
 export default class Note extends Component<MyProps, MyState> {
-    constructor(props: MyProps) {
-        super(props);
-        this.state = {
-            description: '',
-            title: '',
-        };
 
-        this.handleTitleChange = this.handleTitleChange.bind(this);
-        this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-        this.handleSubmitForm = this.handleSubmitForm.bind(this);
-    }
+    state = {
+        description: '',
+        title: '',
+    };
 
     render() {
         return (
@@ -45,19 +39,19 @@ export default class Note extends Component<MyProps, MyState> {
         );
     }
 
-    private handleTitleChange(event: ChangeEvent<HTMLInputElement>) {
+    private handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
         this.setState({
           title: event.target.value,
         });
     }
 
-    private handleDescriptionChange(event: ChangeEvent<HTMLTextAreaElement>) {
+    private handleDescriptionChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         this.setState({
             description: event.target.value,
           });
     }
 
-    private handleSubmitForm(e: FormEvent<HTMLFormElement>) {
+    private handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const note: INote = {
             created: new Date(),

@@ -5,6 +5,7 @@ import EditNotePage from '../editNotePage/EditNotePage';
 import NoteListPage from '../noteListPage/NoteListPage';
 
 export default function Main() {
+
   return (
     <main>
       <Switch>

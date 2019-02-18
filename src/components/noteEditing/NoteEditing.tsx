@@ -6,11 +6,6 @@ import { INote } from '../../interfaces/note';
 type MyProps = { editNote: (change: {}) => void, note: INote};
 
 export default class NoteEditing extends Component<MyProps> {
-    constructor(props: MyProps) {
-        super(props);
-
-        this.handleChange = this.handleChange.bind(this);
-    }
 
     render() {
     const { title, description } = this.props.note;
@@ -37,7 +32,7 @@ export default class NoteEditing extends Component<MyProps> {
     );
   }
 
-    private handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    private handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const change = {
         [event.target.name]: event.target.value,
         };
