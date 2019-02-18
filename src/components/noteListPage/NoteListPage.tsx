@@ -29,16 +29,18 @@ export default class NoteListPage extends Component<MyProps, MyState> {
       </nav>
       <div className="container">
         <NoteCreation addNote={this.addNote}/>
-        {this.state.notes.length === 0 ?
-        <div>There is no notes</div> :
-        this.state.notes.map((note) =>
-        <Note
-          note={note}
-          key={note.id}
-          deleteNote={this.deleteNote}
-          handleMarkAsDone={this.handleMarkAsDone}
-          handleArchive={this.handleArchive}
-        />)}
+        { this.state.notes.length === 0
+          ? <div>There is no notes</div>
+          : this.state.notes.map((note) =>
+            <Note
+              note={note}
+              key={note.id}
+              deleteNote={this.deleteNote}
+              handleMarkAsDone={this.handleMarkAsDone}
+              handleArchive={this.handleArchive}
+            />,
+          )
+        }
       </div>
     </div>
     );
