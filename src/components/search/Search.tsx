@@ -13,6 +13,7 @@ export default class Note extends Component<MyProps, MyState> {
     };
 
     render() {
+
     return (
             <div className="form-group">
                 <input

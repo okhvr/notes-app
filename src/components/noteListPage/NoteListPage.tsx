@@ -59,14 +59,11 @@ export default class NoteListPage extends Component<MyProps, MyState> {
       .catch((er: Error) => console.error('Er', er));
   }
 
-  private handleMarkAsDone = (note: INote) => {
+  private handleMarkAsDone(note: INote) {
     httpRequest(httpMethod.patch, `notes/${note.id}`, { isDone: !note.isDone })
       .then(() => {
-        const marked = this.state.notes.find((n) => n.id === note.id);
-        if (!marked) {
-          return;
-        }
-        const updatedNotes = this.state.notes.map((n) => n === marked ? { ...marked, isDone: !marked.isDone } : n);
+        const updatedNotes = this.state.notes.map((n: INote) =>
+          n.id === note.id ? { ...n, isDone: !n.isDone } : n);
         this.setState({ notes: updatedNotes });
       })
       .catch((er: Error) => console.error('Er', er));
@@ -82,15 +79,13 @@ export default class NoteListPage extends Component<MyProps, MyState> {
       .catch((er: Error) => console.error('Er', er));
   }
 
-  private handleArchive = (note: INote) => {
+  private handleArchive(note: INote) {
     httpRequest(httpMethod.patch, `notes/${note.id}`, { isArchived: true })
       .then(() => {
-        const archived = this.state.notes.find((n) => n.id === note.id);
-        if (!archived) {
-          return;
-        }
-        const updatedNotes = this.state.notes.filter((n) => n !== archived);
-        this.setState({ notes: updatedNotes });
+        this.setState((state: MyState) => ({
+            notes: state.notes.filter((n: INote) => n.id !== note.id)
+          }),
+        );
       })
       .catch((er: Error) => console.error('Er', er));
   }
