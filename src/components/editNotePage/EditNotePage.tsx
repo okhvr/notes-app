@@ -1,7 +1,5 @@
 import React, { Component, Props } from 'react';
-// tslint:disable-next-line:no-implicit-dependencies
-import { RouteComponentProps } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { debounce } from '../../helpers/debounce';
 import { httpMethod, httpRequest } from '../../helpers/httpRequest';
 import { INote } from '../../interfaces/note';
