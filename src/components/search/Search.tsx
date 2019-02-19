@@ -1,7 +1,6 @@
 // tslint:disable-next-line:no-submodule-imports
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { ChangeEvent, Component, FormEvent } from 'react';
-import { INote } from '../../interfaces/note';
+import React, { Component } from 'react';
 
 type MyProps = { handleSearch: (searchValue: string) => void };
 type MyState = { searchValue: string };
@@ -28,10 +27,11 @@ export default class Note extends Component<MyProps, MyState> {
     );
   }
 
-    private handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+    private handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
-        searchValue: event.target.value,
+            searchValue: event.currentTarget.value,
+        }, () => {
+            this.props.handleSearch(this.state.searchValue);
         });
-        this.props.handleSearch(this.state.searchValue);
     }
 }
